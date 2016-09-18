@@ -1,0 +1,30 @@
+# Define menu items
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Insert Function Comment'
+      'command': 'atom-doxit:insert_function'
+    },
+    {
+      'label': 'Insert File Header Comment'
+      'command': 'atom-doxit:insert_header'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'atom-doxit'
+      'submenu': [
+        {
+          'label': 'Insert Function Comment'
+          'command': 'atom-doxit:insert_function'
+        },
+        {
+          'label': 'Insert File Header Comment'
+          'command': 'atom-doxit:insert_header'
+        }
+      ]
+    ]
+  }
+]
