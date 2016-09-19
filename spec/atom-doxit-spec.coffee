@@ -6,57 +6,126 @@ AtomDoxit = require '../lib/atom-doxit'
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe "AtomDoxit", ->
-  [workspaceElement, activationPromise] = []
-
-  beforeEach ->
-    workspaceElement = atom.views.getView(atom.workspace)
-    activationPromise = atom.packages.activatePackage('atom-doxit')
-
-  describe "when the atom-doxit:toggle event is triggered", ->
-    it "hides and shows the modal panel", ->
-      # Before the activation event the view is not on the DOM, and no panel
-      # has been created
-      expect(workspaceElement.querySelector('.atom-doxit')).not.toExist()
-
-      # This is an activation event, triggering it will cause the package to be
-      # activated.
-      atom.commands.dispatch workspaceElement, 'atom-doxit:toggle'
-
+  describe "when the atom-doxit:insert_function event is triggered", ->
+    it "the atom-doxit package should be active", ->
       waitsForPromise ->
-        activationPromise
-
+        atom.packages.activatePackage('atom-doxit')
       runs ->
-        expect(workspaceElement.querySelector('.atom-doxit')).toExist()
+        expect(atom.packages.isPackageActive('atom-doxit')).toBe true
 
-        atomDoxitElement = workspaceElement.querySelector('.atom-doxit')
-        expect(atomDoxitElement).toExist()
-
-        atomDoxitPanel = atom.workspace.panelForItem(atomDoxitElement)
-        expect(atomDoxitPanel.isVisible()).toBe true
-        atom.commands.dispatch workspaceElement, 'atom-doxit:toggle'
-        expect(atomDoxitPanel.isVisible()).toBe false
-
-    it "hides and shows the view", ->
-      # This test shows you an integration test testing at the view level.
-
-      # Attaching the workspaceElement to the DOM is required to allow the
-      # `toBeVisible()` matchers to work. Anything testing visibility or focus
-      # requires that the workspaceElement is on the DOM. Tests that attach the
-      # workspaceElement to the DOM are generally slower than those off DOM.
-      jasmine.attachToDOM(workspaceElement)
-
-      expect(workspaceElement.querySelector('.atom-doxit')).not.toExist()
-
-      # This is an activation event, triggering it causes the package to be
-      # activated.
-      atom.commands.dispatch workspaceElement, 'atom-doxit:toggle'
-
+    it "inserts a @brief comment", ->
       waitsForPromise ->
-        activationPromise
-
+        atom.packages.activatePackage('atom-doxit')
+        atom.views.getView(atom.workspace)
+        atom.workspace.open('brieftest.txt')
       runs ->
-        # Now we can test for view visibility
-        atomDoxitElement = workspaceElement.querySelector('.atom-doxit')
-        expect(atomDoxitElement).toBeVisible()
-        atom.commands.dispatch workspaceElement, 'atom-doxit:toggle'
-        expect(atomDoxitElement).not.toBeVisible()
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_function')
+        editor = atom.workspace.getActiveTextEditor()
+        brief_comment = "* @brief <brief>\r\n"
+        expect(editor.getText()).toContain(brief_comment)
+
+    it "inserts a @return comment", ->
+      waitsForPromise ->
+        atom.packages.activatePackage('atom-doxit')
+        atom.views.getView(atom.workspace)
+        atom.workspace.open('returntest.txt')
+      runs ->
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_function')
+        editor = atom.workspace.getActiveTextEditor()
+        return_comment = "* @return <return_description>\r\n"
+        expect(editor.getText()).toContain(return_comment)
+
+    it "inserts a @details comment", ->
+      waitsForPromise ->
+        atom.packages.activatePackage('atom-doxit')
+        atom.views.getView(atom.workspace)
+        atom.workspace.open('detailstest.txt')
+      runs ->
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_function')
+        editor = atom.workspace.getActiveTextEditor()
+        details_comment = "* @details <details>\r\n"
+        expect(editor.getText()).toContain(details_comment)
+
+  describe "when the atom-doxit:insert_header event is triggered", ->
+    it "the atom-doxit package should be active", ->
+      waitsForPromise ->
+        atom.packages.activatePackage('atom-doxit')
+      runs ->
+        expect(atom.packages.isPackageActive('atom-doxit')).toBe true
+
+    it "inserts a @file comment", ->
+      waitsForPromise ->
+        atom.packages.activatePackage('atom-doxit')
+        atom.views.getView(atom.workspace)
+        atom.workspace.open('brieftest.txt')
+      runs ->
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+        editor = atom.workspace.getActiveTextEditor()
+        file_comment = "* @file brieftest.txt\r\n"
+        expect(editor.getText()).toContain(file_comment)
+
+  it "inserts a @author comment", ->
+    waitsForPromise ->
+      atom.packages.activatePackage('atom-doxit')
+      atom.views.getView(atom.workspace)
+      atom.workspace.open('brieftest.txt')
+    runs ->
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      editor = atom.workspace.getActiveTextEditor()
+      author = atom.config.get('atom-doxit.author_name')
+      author_comment = "* @author " + author + "\r\n"
+      expect(editor.getText()).toContain(author_comment)
+
+  it "inserts a @date comment", ->
+    waitsForPromise ->
+      atom.packages.activatePackage('atom-doxit')
+      atom.views.getView(atom.workspace)
+      atom.workspace.open('brieftest.txt')
+    runs ->
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      editor = atom.workspace.getActiveTextEditor()
+
+      #Generate the date
+      now = new Date
+      day = now.getDate()
+      year = now.getFullYear()
+      month_text = [
+        'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'
+      ]
+      month = month_text[now.getMonth()]
+      date = day + " " + month + " " + year
+      date_comment = "* @date " + date + "\r\n"
+
+      #Check the date
+      expect(editor.getText()).toContain(date_comment)
+
+  it "inserts a @copyright comment", ->
+    waitsForPromise ->
+      atom.packages.activatePackage('atom-doxit')
+      atom.views.getView(atom.workspace)
+      atom.workspace.open('brieftest.txt')
+    runs ->
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      editor = atom.workspace.getActiveTextEditor()
+
+      #Get the year
+      now = new Date
+      year = now.getFullYear()
+
+      #Get the author
+      author = atom.config.get('atom-doxit.author_name')
+
+      #Check the copyright comment
+      copyright_comment = "* @copyright " + year + " " + author + "\r\n"
+      expect(editor.getText()).toContain(copyright_comment)
+
+  it "inserts a @brief comment", ->
+    waitsForPromise ->
+      atom.packages.activatePackage('atom-doxit')
+      atom.views.getView(atom.workspace)
+      atom.workspace.open('brieftest.txt')
+    runs ->
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      editor = atom.workspace.getActiveTextEditor()
+      brief_comment = "* @brief <brief>\r\n"
+      expect(editor.getText()).toContain(brief_comment)
