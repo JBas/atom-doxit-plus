@@ -1,4 +1,4 @@
-## 0.1.0 - First Release
+## 0.0.0 - First Release
 * Add file header comment.
 	* Inserts current date.
 	* Finds filename and inserts.
