@@ -1,10 +1,13 @@
 {
   "name": "atom-doxit",
   "main": "./lib/atom-doxit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Insert Doxygen comments into files.",
   "keywords": [
-    "doxygen", "comment", "header", "insert"
+    "doxygen",
+    "comment",
+    "header",
+    "insert"
   ],
   "repository": "https://github.com/camieac/atom-doxit",
   "license": "MIT",
