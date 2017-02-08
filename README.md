@@ -1,5 +1,7 @@
 # atom-doxit package
 
+[![Build Status](https://travis-ci.org/camieac/atom-doxit.svg?branch=master)](https://travis-ci.org/camieac/atom-doxit)
+
 Insert Doxygen comments into files.
 
 ## Screenshots
