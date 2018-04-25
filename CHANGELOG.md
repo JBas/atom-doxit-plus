@@ -12,3 +12,4 @@
 ## 0.2.0
 * Add seperate copyright holder name.
 * Shorten menu text ("Insert File Header Comment" --> "Insert Header Comment")
+* Remove extra line at end of header comment.

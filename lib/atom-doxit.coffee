@@ -91,7 +91,6 @@ module.exports = AtomDoxit =
                     "* @date " + day + " " + month + " " + year + "\r\n" +
                     "* @copyright " + year + " " + copyright_holder + "\r\n" +
                     "* @brief <brief>\r\n" +
-                    "*/\r\n" +
                     "*/\r\n"
 
     #Insert the header comment at the current cursor position.
