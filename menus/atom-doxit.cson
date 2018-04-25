@@ -6,7 +6,7 @@
       'command': 'atom-doxit:insert_function'
     },
     {
-      'label': 'Insert File Header Comment'
+      'label': 'Insert Header Comment'
       'command': 'atom-doxit:insert_header'
     }
   ]
@@ -21,7 +21,7 @@
           'command': 'atom-doxit:insert_function'
         },
         {
-          'label': 'Insert File Header Comment'
+          'label': 'Insert Header Comment'
           'command': 'atom-doxit:insert_header'
         }
       ]

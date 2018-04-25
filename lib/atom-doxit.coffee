@@ -20,6 +20,9 @@ module.exports = AtomDoxit =
     author_name:
       type: 'string'
       default: 'Joe Bloggs'
+    copyright_holder_name:
+      type: 'string'
+      default: 'Joe Bloggs'
 
   activate: (state) ->
 
@@ -77,17 +80,18 @@ module.exports = AtomDoxit =
     else
       filename = '<filename>'
 
-    #Get author from package settings
+    # Get author and copyright holder from package settings
     author = atom.config.get('atom-doxit.author_name')
+    copyright_holder = atom.config.get('atom-doxit.copyright_holder_name')
 
     # Set the header comment string, inserting date ,filename, etc
     header_comment = "/**\r\n" +
                     "* @file " + filename + "\r\n" +
                     "* @author " + author + "\r\n" +
                     "* @date " + day + " " + month + " " + year + "\r\n" +
-                    "* @copyright " + year + " " + author + "\r\n" +
+                    "* @copyright " + year + " " + copyright_holder + "\r\n" +
                     "* @brief <brief>\r\n" +
-                    "*\r\n" +
+                    "*/\r\n" +
                     "*/\r\n"
 
     #Insert the header comment at the current cursor position.
