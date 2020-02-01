@@ -1,7 +1,7 @@
 {
   "name": "atom-doxit",
   "main": "./lib/atom-doxit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Insert Doxygen comments into files.",
   "keywords": [
     "doxygen",
