@@ -38,6 +38,8 @@ module.exports = AtomDoxit =
 
   insert_function: ->
     editor = atom.workspace.getActiveTextEditor()
+    if !editor
+      return
 
     #TODO: Parse file for parameters instead of using generic comment (Issue #1).
     parameters = [
@@ -71,6 +73,8 @@ module.exports = AtomDoxit =
 
     # Get the editor, so we can use some of its properties
     editor = atom.workspace.getActiveTextEditor()
+    if !editor
+      return
 
     # Get the filename of the current pane
     file = editor?.buffer.file
