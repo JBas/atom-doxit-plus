@@ -1,14 +1,15 @@
 {CompositeDisposable} = require 'atom'
 
 # Helper function for inserting parameters into function string.
-appendParameter = (function_comment, parameters, i) ->
-  function_comment += "* @param "
-  function_comment += parameters[i].type
-  function_comment += " "
-  function_comment += parameters[i].name
-  function_comment += " "
-  function_comment += parameters[i].desc
-  function_comment += "\r\n"
+appendParameter = (function_comment, parameters) ->
+  for param in parameters
+    function_comment += " * @param "
+    function_comment += param.type
+    function_comment += " "
+    function_comment += param.name
+    function_comment += " "
+    function_comment += param.desc
+    function_comment += "\r\n"
   return function_comment
 
 module.exports = AtomDoxit =
@@ -33,6 +34,9 @@ module.exports = AtomDoxit =
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-doxit:insert_function': => @insert_function()
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-doxit:insert_header': => @insert_header()
 
+    #atom.config.set("atom-doxit.author_name", value)
+    console.log(atom.config.get("github"))
+
   deactivate: ->
     @subscriptions.dispose()
 
@@ -48,15 +52,15 @@ module.exports = AtomDoxit =
     ]
 
     function_comment = "/**\r\n" +
-                      "* @brief <brief>\r\n"
+                       " * @brief <brief>\r\n"
 
     #Add parameters to function
-    function_comment = appendParameter(function_comment, parameters, 0)
+    function_comment = appendParameter(function_comment, parameters)
 
     #Add remainder of function comment
-    function_comment += "* @return <return_description>\r\n" +
-                        "* @details <details>\r\n" +
-                        "*/\r\n"
+    function_comment += " * @return <return_description>\r\n" +
+                        " * @details <details>\r\n" +
+                        " */\r\n"
 
     #Add the function comment at the current cursor position
     editor.insertText(function_comment)
@@ -64,12 +68,9 @@ module.exports = AtomDoxit =
   insert_header: ->
     #Get the current date in "1 Aug 2016" format
     now = new Date
+    month = now.getMonth()
     day = now.getDate()
     year = now.getFullYear()
-    month_text = [
-      'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'
-    ]
-    month = month_text[now.getMonth()]
 
     # Get the editor, so we can use some of its properties
     editor = atom.workspace.getActiveTextEditor()
@@ -77,8 +78,7 @@ module.exports = AtomDoxit =
       return
 
     # Get the filename of the current pane
-    file = editor?.buffer.file
-    filepath = file?.path
+    filepath = editor.getBuffer().getPath()
     if filepath
       filename = filepath.substring(filepath.lastIndexOf('/')+1, filepath.length);
     else
@@ -90,12 +90,12 @@ module.exports = AtomDoxit =
 
     # Set the header comment string, inserting date ,filename, etc
     header_comment = "/**\r\n" +
-                    "* @file " + filename + "\r\n" +
-                    "* @author " + author + "\r\n" +
-                    "* @date " + day + " " + month + " " + year + "\r\n" +
-                    "* @copyright " + year + " " + copyright_holder + "\r\n" +
-                    "* @brief <brief>\r\n" +
-                    "*/\r\n"
+                    " * @file " + filename + "\r\n" +
+                    " * @author " + author + "\r\n" +
+                    " * @date " + month + "/" + day + "/" + year + "\r\n" +
+                    " * @copyright " + year + " " + copyright_holder + "\r\n" +
+                    " * @brief <brief>\r\n" +
+                    " */\r\n"
 
     #Insert the header comment at the current cursor position.
     editor.insertText(header_comment)

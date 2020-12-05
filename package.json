@@ -9,7 +9,7 @@
     "header",
     "insert"
   ],
-  "repository": "https://github.com/camieac/atom-doxit",
+  "repository": "https://github.com/JBas/atom-doxit",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

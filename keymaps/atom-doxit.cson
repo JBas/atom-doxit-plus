@@ -8,5 +8,7 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
-  'ctrl-alt-o': 'atom-doxit:insert_function'
-  'ctrl-alt-c': 'atom-doxit:insert_header'
+  'cmd-shift-f': 'atom-doxit:insert_function'
+  'cmd-shift-h': 'atom-doxit:insert_header'
+  'ctrl-shift-f': 'atom-doxit:insert_function'
+  'ctrl-shift-h': 'atom-doxit:insert_header'
