@@ -1,4 +1,5 @@
-{CompositeDisposable} = require 'atom'
+
+import {CompositeDisposable} from "atom"
 
 # Helper function for inserting parameters into function string.
 appendParameter = (function_comment, parameters) ->
