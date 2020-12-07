@@ -1,0 +1,8 @@
+title: atom-doxit
+description: An Atom package for Doxygen commenting.
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
