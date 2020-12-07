@@ -15,5 +15,5 @@ Insert Doxygen comments into files.
 [The Atom Doxit Website](https://camieac.github.io/atom-doxit/)
 
 ## Contributors
-Cameron A. Craig (@camieac)
+Cameron A. Craig (@camieac)\
 Joshua N. Bas (@JBas)
