@@ -15,3 +15,4 @@ Insert Doxygen comments into files.
 
 ## Contributors
 Cameron A. Craig (@camieac)
+Joshua N. Bas
