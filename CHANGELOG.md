@@ -13,3 +13,8 @@
 * Add seperate copyright holder name.
 * Shorten menu text ("Insert File Header Comment" --> "Insert Header Comment")
 * Remove extra line at end of header comment.
+
+## 0.3.0
+* Added simple function parsing for C-like files
+* Added GitHub name to author_name member of config schema
+* Duplicated fork and proceeded to new version number

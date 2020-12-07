@@ -1,4 +1,4 @@
-AtomDoxit = require '../lib/atom-doxit'
+AtomDoxit = require '../lib/atom-doxit-plus'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
@@ -6,83 +6,83 @@ AtomDoxit = require '../lib/atom-doxit'
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe "AtomDoxit", ->
-  describe "when the atom-doxit:insert_function event is triggered", ->
-    it "the atom-doxit package should be active", ->
+  describe "when the atom-doxit-plus:insert_function event is triggered", ->
+    it "the atom-doxit-plus package should be active", ->
       waitsForPromise ->
-        atom.packages.activatePackage('atom-doxit')
+        atom.packages.activatePackage('atom-doxit-plus')
       runs ->
-        expect(atom.packages.isPackageActive('atom-doxit')).toBe true
+        expect(atom.packages.isPackageActive('atom-doxit-plus')).toBe true
 
     it "inserts a @brief comment", ->
       waitsForPromise ->
-        atom.packages.activatePackage('atom-doxit')
+        atom.packages.activatePackage('atom-doxit-plus')
         atom.views.getView(atom.workspace)
         atom.workspace.open('brieftest.txt')
       runs ->
-        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_function')
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_function')
         editor = atom.workspace.getActiveTextEditor()
         brief_comment = "* @brief <brief>\r\n"
         expect(editor.getText()).toContain(brief_comment)
 
     it "inserts a @return comment", ->
       waitsForPromise ->
-        atom.packages.activatePackage('atom-doxit')
+        atom.packages.activatePackage('atom-doxit-plus')
         atom.views.getView(atom.workspace)
         atom.workspace.open('returntest.txt')
       runs ->
-        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_function')
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_function')
         editor = atom.workspace.getActiveTextEditor()
         return_comment = "* @return <return_description>\r\n"
         expect(editor.getText()).toContain(return_comment)
 
     it "inserts a @details comment", ->
       waitsForPromise ->
-        atom.packages.activatePackage('atom-doxit')
+        atom.packages.activatePackage('atom-doxit-plus')
         atom.views.getView(atom.workspace)
         atom.workspace.open('detailstest.txt')
       runs ->
-        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_function')
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_function')
         editor = atom.workspace.getActiveTextEditor()
         details_comment = "* @details <details>\r\n"
         expect(editor.getText()).toContain(details_comment)
 
-  describe "when the atom-doxit:insert_header event is triggered", ->
-    it "the atom-doxit package should be active", ->
+  describe "when the atom-doxit-plus:insert_header event is triggered", ->
+    it "the atom-doxit-plus package should be active", ->
       waitsForPromise ->
-        atom.packages.activatePackage('atom-doxit')
+        atom.packages.activatePackage('atom-doxit-plus')
       runs ->
-        expect(atom.packages.isPackageActive('atom-doxit')).toBe true
+        expect(atom.packages.isPackageActive('atom-doxit-plus')).toBe true
 
     it "inserts a @file comment", ->
       waitsForPromise ->
-        atom.packages.activatePackage('atom-doxit')
+        atom.packages.activatePackage('atom-doxit-plus')
         atom.views.getView(atom.workspace)
         atom.workspace.open('brieftest.txt')
       runs ->
-        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+        atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_header')
         editor = atom.workspace.getActiveTextEditor()
         file_comment = "* @file brieftest.txt\r\n"
         expect(editor.getText()).toContain(file_comment)
 
   it "inserts a @author comment", ->
     waitsForPromise ->
-      atom.packages.activatePackage('atom-doxit')
+      atom.packages.activatePackage('atom-doxit-plus')
       atom.views.getView(atom.workspace)
       atom.workspace.open('brieftest.txt')
     runs ->
-      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_header')
       editor = atom.workspace.getActiveTextEditor()
-      author = atom.config.get('atom-doxit.author_name')
+      author = atom.config.get('atom-doxit-plus.author_name')
       author_comment = "* @author " + author + "\r\n"
       expect(editor.getText()).toContain(author_comment)
 
   it "inserts a @date comment", ->
     waitsForPromise ->
-      atom.packages.activatePackage('atom-doxit')
+      atom.packages.activatePackage('atom-doxit-plus')
       atom.views.getView(atom.workspace)
       atom.workspace.open('brieftest.txt')
     runs ->
-      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_header')
       editor = atom.workspace.getActiveTextEditor()
 
       #Generate the date
@@ -101,11 +101,11 @@ describe "AtomDoxit", ->
 
   it "inserts a @copyright comment", ->
     waitsForPromise ->
-      atom.packages.activatePackage('atom-doxit')
+      atom.packages.activatePackage('atom-doxit-plus')
       atom.views.getView(atom.workspace)
       atom.workspace.open('brieftest.txt')
     runs ->
-      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_header')
       editor = atom.workspace.getActiveTextEditor()
 
       #Get the year
@@ -113,7 +113,7 @@ describe "AtomDoxit", ->
       year = now.getFullYear()
 
       #Get the author
-      author = atom.config.get('atom-doxit.author_name')
+      author = atom.config.get('atom-doxit-plus.author_name')
 
       #Check the copyright comment
       copyright_comment = "* @copyright " + year + " " + author + "\r\n"
@@ -121,11 +121,11 @@ describe "AtomDoxit", ->
 
   it "inserts a @brief comment", ->
     waitsForPromise ->
-      atom.packages.activatePackage('atom-doxit')
+      atom.packages.activatePackage('atom-doxit-plus')
       atom.views.getView(atom.workspace)
       atom.workspace.open('brieftest.txt')
     runs ->
-      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit:insert_header')
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-doxit-plus:insert_header')
       editor = atom.workspace.getActiveTextEditor()
       brief_comment = "* @brief <brief>\r\n"
       expect(editor.getText()).toContain(brief_comment)

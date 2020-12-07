@@ -3,26 +3,26 @@
   'atom-text-editor': [
     {
       'label': 'Insert Function Comment'
-      'command': 'atom-doxit:insert_function'
+      'command': 'atom-doxit-plus:insert_function'
     },
     {
       'label': 'Insert Header Comment'
-      'command': 'atom-doxit:insert_header'
+      'command': 'atom-doxit-plus:insert_header'
     }
   ]
 'menu': [
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'atom-doxit'
+      'label': 'atom-doxit-plus'
       'submenu': [
         {
           'label': 'Insert Function Comment'
-          'command': 'atom-doxit:insert_function'
+          'command': 'atom-doxit-plus:insert_function'
         },
         {
           'label': 'Insert Header Comment'
-          'command': 'atom-doxit:insert_header'
+          'command': 'atom-doxit-plus:insert_header'
         }
       ]
     ]

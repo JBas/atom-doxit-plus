@@ -1,7 +1,7 @@
 {
-  "name": "atom-doxit",
-  "main": "./lib/atom-doxit",
-  "version": "0.2.1",
+  "name": "atom-doxit-plus",
+  "main": "./lib/atom-doxit-plus",
+  "version": "0.3.0",
   "description": "Insert Doxygen comments into files.",
   "keywords": [
     "doxygen",
@@ -9,7 +9,7 @@
     "header",
     "insert"
   ],
-  "repository": "https://github.com/JBas/atom-doxit",
+  "repository": "https://github.com/JBas/atom-doxit-plus",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
