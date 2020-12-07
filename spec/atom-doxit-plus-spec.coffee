@@ -5,7 +5,7 @@ AtomDoxit = require '../lib/atom-doxit-plus'
 # To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
-describe "AtomDoxit", ->
+describe "AtomDoxitPlus", ->
   describe "when the atom-doxit-plus:insert_function event is triggered", ->
     it "the atom-doxit-plus package should be active", ->
       waitsForPromise ->
